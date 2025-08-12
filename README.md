@@ -96,25 +96,25 @@ tm.dispose();
 
 ## CLI (tmjs)
 
-Kurulumdan sonra terminalden hızlıca deneyebilirsiniz:
+After installation, you can quickly try it from the terminal:
 
 ```bash
-# Tek görsel
+# Single image
 tmjs --model https://teachablemachine.withgoogle.com/models/XXX/ image.jpg
 
-# Video + GIF, turbo ve kare sayısı ile
+# Video + GIF with turbo and frame count
 tmjs --model ./model --media video --frames 8 --turbo video.mp4 gif.gif
 ```
 
-Argümanlar:
+Arguments:
 
-- `--model <url|dir>`: Model kaynağı (URL ya da yerel dizin)
-- `--backend tfjs|tfjs-node`: Backend seçimi
-- `--io ram|disk`: I/O modu
-- `--media image|video|auto`: Girdi türü yönlendirme
+- `--model <url|dir>`: Model source (URL or local directory)
+- `--backend tfjs|tfjs-node`: Backend selection
+- `--io ram|disk`: I/O mode
+- `--media image|video|auto`: Input type routing
 - `--frames N`, `--topK K`, `--maxBytes BYTES`, `--turbo`
 
-Çıktı JSON olarak stdout’a yazılır, CI ve otomasyon için uygundur.
+Output is printed as JSON to stdout; suitable for CI and automation.
 
 ---
 
@@ -127,7 +127,7 @@ Argümanlar:
   * Default in‑RAM pipeline avoids disk I/O.
   * Automatic fallback to disk when RAM extractor yields no frames.
   * Guaranteed temp cleanup on success and failure.
-  * Optional Worker Threads (`preprocessUseWorkers: true`) ile ön işleme ana iş parçacığından ayrılır.
+  * Optional Worker Threads (`preprocessUseWorkers: true`) separate preprocessing from the main thread.
 * **Video classification (FFmpeg)**
   * Frame sampling via FFmpeg with robust single‑pass PNG pipeline.
   * GIFs supported the same way.
@@ -151,7 +151,7 @@ Options:
 * `warmup?: boolean` — run one forward pass on zeros (default true).
 * `ioMode?: 'ram'|'disk'` — RAM mode uses in‑memory pipeline; disk uses temp files.
 * `backend?: 'tfjs'|'tfjs-node'` — select JS vs native backend at init.
-* `preprocessUseWorkers?: boolean` — sharp tabanlı ön işlemi Worker Threads ile çalıştır (CPU yükünü ana iş parçacığından ayırır).
+* `preprocessUseWorkers?: boolean` — run sharp-based preprocessing in Worker Threads (keeps CPU-heavy work off the main thread).
 
 Returns an instance with methods below.
 
@@ -186,13 +186,13 @@ Returns an instance with methods below.
 
 ## TypeScript
 
-Paket `.d.ts` tip dosyası ile gelir. Başlıca tipler:
+The package ships with a `.d.ts` type file. Key types:
 
 - `CreateOptions`
 - `ImageResult`, `BatchImageResult`
 - `VideoResult`, `FramePrediction`
 
-Örnek:
+Example:
 
 ```ts
 import TeachableMachine, { CreateOptions, VideoResult } from 'teachable-machine.js';
